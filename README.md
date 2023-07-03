@@ -1,2 +1,2 @@
 # hsj
-아파트 실거래가 예측모델
+# Price Prediction for Apartments in Korea
