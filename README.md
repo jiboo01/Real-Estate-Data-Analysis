@@ -1,13 +1,14 @@
 # Price Prediction for Apartments in Korea
 ### Project Aim
-The Korean Government has released data of transaction prices and appraised prices of housings in Korea. Not all housings have data of both of them but rather only the appraised price. So in this project it is aimed to estimate transaction prices of apartments that lack of those based on several variables such as appraised prices, distance to the closest subway station, distance to the closest high school and other relevant factors.
+The Korean Government has made available housing transaction prices and appraised prices data for properties in Korea. However, not all properties have data for both transaction prices and appraised prices. Some properties only have information on the appraised price. Consequently, this project aims to estimate the transaction prices for apartments lacking such data, utilizing various variables including appraised prices, distances to the nearest subway station and high school, and other relevant factors.
 ### Data used
 
 ### Areas for improvement
 1) More factors to be added
    Commercial facilities, job opportunities, NIMBY etc.
-3) Floor data incomplete
-   
-5) Actual distance to be calculated
+3) Incomplate floor data
+   The 'floor' column was determined by extracting the initial numeric value from the 'ho' column. Consequently, uncertain values were uniformly assigned as 1, representing the first floor, which may not accurately reflect the actual floors.
+5) Actual distance missing
+   The 'distance' columns indicate the direct distances between two points, such as the apartment-school or apartment-subway station. However, these distances do not account for the actual traveling distance, which may differ due to various factors such as road layouts, traffic conditions, or available transportation routes.
    
 ## For full process 
