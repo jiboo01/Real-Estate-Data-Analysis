@@ -18,6 +18,7 @@ cur = con.cursor()
 # Extracting data by administrative districts; in this case 대전광역시(Daejeon)
 
 # << Columns explained >>
+
 # 시도 : Administrative District in Korea
 # official_price : Appraised Price of a certain unit within the apartment(공시지가)
 # 경도 : longitude
@@ -28,10 +29,13 @@ cur = con.cursor()
 # area : Area(pyeong) of a certain unit (pyeong = square meter/3.3)
 # floor : Floor that a certain unit is located
 # actual : Transaction Price of a certain unit within the apartment(실거래가)
+
 sql = "SELECT pk, 시도, official_price, 경도, 위도, closest_sub, closest_high, school_1km, area, floor, actual FROM off_act_price WHERE 시도='대전광역시'"
 cur.execute(sql)
 rows = cur.fetchall()
 con.close()
+
+
 
 # Turn table into a dataframe
 daejeon = pd.DataFrame(rows)
@@ -39,20 +43,25 @@ end_time = time.time()
 taketime = str(end_time - start_time)
 print("대전광역시 import time (s) : " + taketime)
 
+
 # Sort data that have transaction price 
 real_trainInfo = daejeon.dropna(subset='actual')
 
+
 # Sort data that lack of transaction price
 needPredict = daejeon[daejeon['actual'].isnull()==True]
+
 
 # Delete target variable to make train dataset
 X = real_trainInfo.drop('actual', axis=1)
 y = real_trainInfo['actual']
 
+
 # Split train/valid/test set to 6:2:2
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 x_train, x_valid, y_train, y_valid = train_test_split(X_train, y_train, test_size=0.25, random_state=1)
+
 
 # Extract 'pk' column to use as key value
 train_pk = x_train['pk']
@@ -60,23 +69,29 @@ valid_pk = x_valid['pk']
 test_pk = X_test['pk']
 predict_pk = needPredict['pk']
 
-# Change negative values to positive for normalization
+
+# Change negative values to positive for log transformation, square root transformation
 train_data = x_train.join(y_train)
 train_data['floor'] = train_data['floor']+2
 train_data['school_1km'] = train_data['school_1km']+2
 needPredict['floor'] = needPredict['floor']+2
 needPredict['school_1km'] = needPredict['school_1km']+2
 
-# Normalization using log, 
+
+# Log transformation, square root transformation used for normal distribution
 train_data[['school_1km', 'area']] = np.sqrt(train_data[['school_1km', 'area']])
 train_data[['actual','floor', 'official_price', 'closest_sub', 'closest_high']] = np.log(train_data[['actual','floor', 'official_price', 'closest_sub', 'closest_high']])
 needPredict[['school_1km', 'area']] = np.sqrt(needPredict[['school_1km', 'area']])
 needPredict[['floor', 'official_price', 'closest_sub', 'closest_high']] = np.log(needPredict[['floor', 'official_price', 'closest_sub', 'closest_high']])
 
+
+# Drop non-numerical data for ML
+x_train, y_train = train_data.drop(['actual', 'pk', '시도'], axis=1), train_data['actual']
 realX = needPredict.drop(['actual', 'pk', '시도'], axis=1)
 
-x_train, y_train = train_data.drop(['actual', 'pk', '시도'], axis=1), train_data['actual']
 
+
+# Same process for valid dataset
 valid_data = x_valid.join(y_valid)
 
 valid_data['floor'] = valid_data['floor']+2
@@ -87,6 +102,9 @@ valid_data[['actual','floor', 'official_price', 'closest_sub', 'closest_high']] 
 
 x_valid, y_valid = valid_data.drop(['actual', 'pk', '시도'], axis=1), valid_data['actual']
 
+
+
+# Same process for test dataset
 test_data = X_test.join(y_test)
 
 test_data['floor'] = test_data['floor']+2
@@ -98,12 +116,19 @@ test_data[['actual_price','floor', 'official_price', 'closest_sub', 'closest_hig
 y_test_actual_price = test_data['actual']
 X_test, y_test = test_data.drop(['actual', 'actual_price', 'pk', '시도'], axis=1), test_data['actual_price']
 
+
+
+# Normalization
 scaler = MinMaxScaler()
 
 scaler.fit(x_train)
 x_train_s = scaler.transform(x_train)
 x_valid_s = scaler.transform(x_valid)
 X_test_s = scaler.transform(X_test)
+
+
+
+# Running Machine Learning Model - Decision Tree Regression
 
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_absolute_error
@@ -112,7 +137,7 @@ from sklearn.metrics import r2_score
 tree = DecisionTreeRegressor()
 tree.fit(x_train_s, y_train)
 print(' ')
-print('====== 의사결정나무 ======')
+print('====== Decision Tree Regression ======')
 treeScore = tree.score(X_test_s, y_test)
 print('tree.score = ', end=' ')
 print(treeScore)
@@ -155,6 +180,10 @@ final_r2_tree = r2_score(y_test, final_pred_tree)
 print('Test Set RMSE: ', final_rmse_tree)
 print('Test Set R2: ', final_r2_tree)
 
+
+
+# Predicting Unseen Prices using the same model
+
 needPredict_s = scaler.transform(realX)
 finalPred = tree.predict(needPredict_s)
 needPred_df = pd.DataFrame(finalPred, columns=['예측가격'])
@@ -165,7 +194,10 @@ print(' ')
 print('<< null 예측값 >>')
 print(needPred_df)
 
-# 예측값
+
+
+# Reverting Test Dataset Predicted Price values to real scale
+
 pred_tr = pd.DataFrame(final_pred_tree, columns=['예측가격'])
 pred_tr['pk'] = test_pk.values
 pred_tr['predicted_price'] = np.exp(pred_tr['예측가격'])
@@ -175,19 +207,20 @@ pred_tr['predicted_price'] = pred_tr['predicted_price'].astype(float)
 pred_tr.drop('예측가격', axis=1, inplace=True)
 
 
+# Visualizing test dataset Error Distribution
 pred_tr['error'] = (pred_tr['actual_price'] - pred_tr['predicted_price']) / pred_tr['actual_price'] * 100
 print(' ')
 print(pred_tr.describe())
 pred_tr['error'].hist(bins=50)
 plt.rc("axes", unicode_minus=False)
 plt.rc('font', family='NanumGothic')
-plt.title('대전광역시 의사결정나무 오차율 분포')
+plt.title('Error Distribution in Decision Tree Regression Model : Daejeon')
 plt.show()
 
 test_df = pred_tr[['pk', 'predicted_price']]
 total_df = pd.concat([needPred_df, test_df])
 
-
+# Visualizing test dataset 'Predicted Price vs. Actual Price'
 final_tr = pred_tr[['predicted_price', 'actual_price']]
 
 plt.rc('font', family='NanumGothic')
@@ -195,6 +228,8 @@ final_tr.iloc[1700:1800, :].plot(figsize=(30,7))
 plt.show()
 
 
+
+# Storing data into MySQL table
 engine = create_engine("mysql+pymysql://jiwoo:1234@localhost:3306/TESTDB?charset=utf8mb4")
 conn = engine.connect()
 table_name = 'predicted_price'
@@ -204,17 +239,13 @@ end_time = time.time()
 taketime = str(end_time - start_time)
 print(table_name+" 스크립트 실행 소요시간 (단위 초) : " + taketime)
 print(' ')
-print('<< test set & null 예측값 >>')
+print('<< test set & null values prediction >>')
 print(total_df)
     
 
-#pred_tr['predicted_price'] = np.exp(pred_tr['예측가격'])
-#table_tr = pd.concat([needPredict, pred_tr], axis=1)
-#final_table = pd.concat([pk_predict, table_tr], axis=1)
-
-
+# Showing the dataframe
 pd.set_option('display.max_columns', None)
 print(' ')
-print('======== test set 실제값/예측값 비교 =========')
+print("======== Test Dataset 'Predicted Price vs. Actual Price' =========")
 print(final_tr)
 
