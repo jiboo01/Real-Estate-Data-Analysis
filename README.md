@@ -7,9 +7,11 @@ The Korean Government has made available housing transaction prices and appraise
 1) More factors to be added
 
 Commercial facilities, job opportunities, NIMBY(not in my backyard) etc.
+
 2) Incomplate floor data
 
 The 'floor' column was determined by extracting the initial numeric value from the 'ho' column. Consequently, uncertain values were uniformly assigned as 1, representing the first floor, which may not accurately reflect the actual floors.
+
 3) Actual distance missing
 
 The 'distance' columns indicate the direct distances between two points, such as the apartment-school or apartment-subway station. However, these distances do not account for the actual traveling distance, which may differ due to various factors such as road layouts, traffic conditions, or available transportation routes.
