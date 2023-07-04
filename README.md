@@ -17,10 +17,24 @@ The 'distance' columns indicate the direct distances between two points, such as
 
 ---   
 ### Files
-For full process (From preprocessing to ML & visualization) : [3. Price Prediction (ML Model)/수도권 실거래가 예측 모델_수정.ipynb](https://github.com/jiboo01/hsj/blob/main/3.%20Price%20Prediction%20(ML%20Model)/%EC%88%98%EB%8F%84%EA%B6%8C%20%EC%8B%A4%EA%B1%B0%EB%9E%98%EA%B0%80%20%EC%98%88%EC%B8%A1%20%EB%AA%A8%EB%8D%B8_%EC%88%98%EC%A0%95.ipynb)
+* For full process (From preprocessing to ML & visualization) : [3. Price Prediction (ML Model)/수도권 실거래가 예측 모델_수정.ipynb](https://github.com/jiboo01/hsj/blob/main/3.%20Price%20Prediction%20(ML%20Model)/%EC%88%98%EB%8F%84%EA%B6%8C%20%EC%8B%A4%EA%B1%B0%EB%9E%98%EA%B0%80%20%EC%98%88%EC%B8%A1%20%EB%AA%A8%EB%8D%B8_%EC%88%98%EC%A0%95.ipynb)
 
-Import & Export ML outputs : [3. Price Prediction (ML Model)/ML모델 DB넣기.py](https://github.com/jiboo01/hsj/blob/main/3.%20Price%20Prediction%20(ML%20Model)/ML%EB%AA%A8%EB%8D%B8%20DB%EB%84%A3%EA%B8%B0.py)
+    In [4] ~ In [7] : Mapping Appraised Price & Address Data
 
-Further Analysis : [3. Price Prediction (ML Model)/분석](https://github.com/jiboo01/hsj/tree/main/3.%20Price%20Prediction%20(ML%20Model)/%EB%B6%84%EC%84%9D)
+    In [13] ~ In [46] : Creating 'floor' column by cleaning 'ho' column
 
-Data Used : [data](https://github.com/jiboo01/hsj/tree/main/data)
+    In [51] ~ In [59] : Cleaning Address Data for mapping Geospatial Data
+
+    In [61] ~ In [85] : Calculating direct distance to School & Subway st.
+
+    In [88] ~ In [95] : Mapping Transaction Price Data to Appraised Price Data
+
+    In [96] ~ In
+
+
+  
+* Import & Export ML outputs : [3. Price Prediction (ML Model)/ML모델 DB넣기.py](https://github.com/jiboo01/hsj/blob/main/3.%20Price%20Prediction%20(ML%20Model)/ML%EB%AA%A8%EB%8D%B8%20DB%EB%84%A3%EA%B8%B0.py)
+
+* Further Analysis : [3. Price Prediction (ML Model)/분석](https://github.com/jiboo01/hsj/tree/main/3.%20Price%20Prediction%20(ML%20Model)/%EB%B6%84%EC%84%9D)
+
+* Data Used : [data](https://github.com/jiboo01/hsj/tree/main/data)
