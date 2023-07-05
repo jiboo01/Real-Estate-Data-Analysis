@@ -7,7 +7,7 @@ The Korean Government has made available housing transaction prices and appraise
 
 Commercial facilities, job opportunities, NIMBY(not in my backyard) etc.
 
-2) Incomplate floor data
+2) Incomplete floor data
 
 The 'floor' column was determined by extracting the initial numeric value from the 'ho' column. Consequently, uncertain values were uniformly assigned as 1, representing the first floor, which may not accurately reflect the actual floors.
 
