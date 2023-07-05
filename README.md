@@ -47,7 +47,12 @@ The 'distance' columns indicate the direct distances between two points, such as
 
     Line 73 ~ 127 : Preprocessing Data for ML
 
-    Line 131 ~ 181 : 
+    Line 131 ~ 181 : Running & Testing ML Model
+
+    Line 185 ~ 228 : Visualizing the Results of Price Prediction
+
+    Line 232 ~ 243 : Storing Result into MySQL
+  
 * Further Analysis : [3. Price Prediction (ML Model)/분석](https://github.com/jiboo01/hsj/tree/main/3.%20Price%20Prediction%20(ML%20Model)/%EB%B6%84%EC%84%9D)
 
 * Data Used : [data](https://github.com/jiboo01/hsj/tree/main/data)
