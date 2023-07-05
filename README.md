@@ -29,6 +29,8 @@ The 'distance' columns indicate the direct distances between two points, such as
 
     In [88] ~ In [95] : Mapping Transaction Price Data to Appraised Price Data
 
+        머신러닝 코드는 아래 'Final ML Model'을 사용할 것
+
         ~~In [96] ~ In [112] : Preprocessing Data for ML~~
 
         ~~In [113] ~ In [125] : Testing various ML Models~~
