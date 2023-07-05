@@ -29,11 +29,11 @@ The 'distance' columns indicate the direct distances between two points, such as
 
     In [88] ~ In [95] : Mapping Transaction Price Data to Appraised Price Data
 
-    <span style="color:gray">In [96] ~ In [112] : Preprocessing Data for ML</span>
+        ~~In [96] ~ In [112] : Preprocessing Data for ML~~
 
-    In [113] ~ In [125] : Testing various ML Models
+        ~~In [113] ~ In [125] : Testing various ML Models~~
 
-    In [126] ~ : Visualizing Accuracy of prediction
+        ~~In [126] ~ : Visualizing Accuracy of prediction~~
 
 
   
