@@ -25,7 +25,7 @@ The 'distance' columns indicate the direct distances between two points, such as
 
     In [51] ~ In [59] : Cleaning Address Data for mapping Geospatial Data
 
-        전국 모든 지역에 대한 주소 데이터 cleaning은 '수도권_동별 Clustering 공시지가 copy.ipynb' 참고
+        전국 모든 지역에 대한 주소 데이터 cleaning은 아래 '수도권_동별 Clustering 공시지가 copy.ipynb' 참고
 
    [수도권_동별 Clustering 공시지가 copy.ipynb](https://github.com/jiboo01/hsj/blob/main/%EC%88%98%EB%8F%84%EA%B6%8C_%EB%8F%99%EB%B3%84%20Clustering%20%EA%B3%B5%EC%8B%9C%EC%A7%80%EA%B0%80%20copy.ipynb) : In [10] ~ In [22]
 
