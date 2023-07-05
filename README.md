@@ -17,7 +17,7 @@ The 'distance' columns indicate the direct distances between two points, such as
 
 ---   
 ### Files
-* For full process (From preprocessing to ML & visualization) : [3. Price Prediction (ML Model)/수도권 실거래가 예측 모델_수정.ipynb](https://github.com/jiboo01/hsj/blob/main/3.%20Price%20Prediction%20(ML%20Model)/%EC%88%98%EB%8F%84%EA%B6%8C%20%EC%8B%A4%EA%B1%B0%EB%9E%98%EA%B0%80%20%EC%98%88%EC%B8%A1%20%EB%AA%A8%EB%8D%B8_%EC%88%98%EC%A0%95.ipynb)
+* Full process (From cleaning data to ML & visualization) : [3. Price Prediction (ML Model)/수도권 실거래가 예측 모델_수정.ipynb](https://github.com/jiboo01/hsj/blob/main/3.%20Price%20Prediction%20(ML%20Model)/%EC%88%98%EB%8F%84%EA%B6%8C%20%EC%8B%A4%EA%B1%B0%EB%9E%98%EA%B0%80%20%EC%98%88%EC%B8%A1%20%EB%AA%A8%EB%8D%B8_%EC%88%98%EC%A0%95.ipynb)
 
     In [4] ~ In [7] : Mapping Appraised Price & Address Data
 
@@ -29,7 +29,11 @@ The 'distance' columns indicate the direct distances between two points, such as
 
     In [88] ~ In [95] : Mapping Transaction Price Data to Appraised Price Data
 
-    In [96] ~ In
+    In [96] ~ In [112] : Preprocessing Data for ML
+
+    In [113] ~ In [125] : Testing ML Model 
+
+    In [126] ~ : Visualizing Accuracy of prediction
 
 
   
