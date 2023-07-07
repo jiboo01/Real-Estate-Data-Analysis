@@ -60,6 +60,7 @@ The 'distance' columns indicate the direct distances between two points, such as
   
 * Further Analysis : [3. Price Prediction (ML Model)/분석](https://github.com/jiboo01/hsj/tree/main/3.%20Price%20Prediction%20(ML%20Model)/%EB%B6%84%EC%84%9D)
 
+* Data Used : [data](https://github.com/jiboo01/hsj/tree/main/data)
 ### Requirements
 absl-py @ file:///home/conda/feedstock_root/build_artifacts/absl-py_1673535674859/work
 aiohttp @ file:///home/conda/feedstock_root/build_artifacts/aiohttp_1649013149994/work
@@ -155,4 +156,3 @@ yarl @ file:///home/conda/feedstock_root/build_artifacts/yarl_1648966516552/work
 zipp @ file:///home/conda/feedstock_root/build_artifacts/zipp_1677313463193/work
 zstandard @ file:///opt/conda/conda-bld/zstandard_1663827383994/work
 
-* Data Used : [data](https://github.com/jiboo01/hsj/tree/main/data)
